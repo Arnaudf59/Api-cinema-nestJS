@@ -1,36 +1,54 @@
-import { Body, Controller, Delete, Get, Logger, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Logger, Param, Patch, Post } from '@nestjs/common';
+import { CinemaDto } from 'src/dtos/cinema.dto';
+import { CinemaService } from './cinema.service';
 
 @Controller('cinema')
 export class CinemaController {
 
+    constructor(
+        private readonly cinemaService: CinemaService
+    ){}
+
     @Get()
         getCinema() {
             Logger.log('Recup tous les cinéma', 'CinemaController');
-            return [];
+            return this.cinemaService.getCinema();
         }
     
     @Get(':cinemaId')
-        getCinemaById(@Param('cinemaId') cinemaId) {
+        async getCinemaById(@Param('cinemaId') cinemaId) {
             Logger.log('Recup tous les cinéma', 'CinemaController');
-            return cinemaId;
+            const cinema = await this.cinemaService.getCinemaById(cinemaId);
+            if(cinema)
+                return cinema;
+            throw new HttpException('Article non trouvé', HttpStatus.NOT_FOUND);
         }
 
     @Post()
-        createCinema(@Body() cinemaDto: number){
+        async createCinema(@Body() cinemaDto: CinemaDto){
             Logger.log('Création cinéma', 'CinemaController');
-            return 'Création cinéma';
+            const cinema = await this.cinemaService.createCinema(cinemaDto);
+            if(cinema)
+                return cinema;
+            throw new HttpException('Cinema non créer', HttpStatus.NOT_MODIFIED);
         }
     
     @Patch(':cinemaId')
-        updateCinema(@Param('cinemaId') cinemaId, @Body() cinemaDto){
+        async updateCinema(@Param('cinemaId') cinemaId, @Body() cinemaDto){
             Logger.log('Cinema Modifier', 'CinemaController')
-            return 'Modification du cinéma'
+            const cinema = await this.cinemaService.updateCinema(cinemaId, cinemaDto);
+            if(cinema)
+                return cinema;
+            throw new HttpException('Cinema non modifié', HttpStatus.NOT_MODIFIED);
         }
     
     @Delete(':cinemaId')
-        remove(@Param('cinemaId') cinemaId){
+        async remove(@Param('cinemaId') cinemaId){
             Logger.log('Cinéma supprimer', 'CinemaController');
-            return 'Suppression Du cinema';
+            const cinema = await this.cinemaService.removeCinema(cinemaId);
+            if(cinema)
+                return cinema;
+            throw new HttpException('Cinema non trouvé', HttpStatus.NOT_FOUND);
         }
         
 }
