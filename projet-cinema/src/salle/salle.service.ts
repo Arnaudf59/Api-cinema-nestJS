@@ -36,4 +36,19 @@ export class SalleService {
         return this.salleRepository.save(salle);
     }
     
+    async updateSalle(salleId: number, salleDto: SalleDto){
+        const salle = await this.salleRepository.findOne(salleId)
+        if(!salle)
+            return null;
+        await this.salleRepository.update(salleId, salleDto);
+        return await this.salleRepository.findOne(salleId, {relations : ['cinema']});
+    }
+
+    async removeSalle(salleId: number){
+        const salle = await this.salleRepository.findOne(salleId);
+        if(!salle)
+            return null;
+        this.salleRepository.remove(salle);
+        return salle;
+    }
 }

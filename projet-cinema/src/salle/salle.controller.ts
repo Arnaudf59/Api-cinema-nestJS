@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Logger, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Logger, Param, Patch, Post } from '@nestjs/common';
 import { SalleDto } from 'src/dtos/salle.dto';
 import { SalleService } from './salle.service';
 
@@ -30,6 +30,24 @@ export class SalleController {
             const salle = await this.salleService.createSalle(cinemaId, salleDto);
             if(salle)
                 return salle;
-                throw new HttpException('Salle non ajouté', HttpStatus.NOT_MODIFIED);
+                throw new HttpException('Salle non trouvé', HttpStatus.NOT_FOUND);
+        }
+
+    @Patch(':salleId')
+        async updateSalle(@Param('salleId') salleId, @Body() salleDto) {
+            Logger.log('Modifier une Salle', 'SalleController');
+            const salle = await this.salleService.updateSalle(salleId, salleDto);
+            if(salle)
+                return salle;
+            throw new HttpException('Salle non modifié', HttpStatus.NOT_MODIFIED);
+        }
+
+    @Delete(':salleId')
+        async remove(@Param('salleId') salleId) {
+            Logger.log('Supprimer une salle', 'SalleController');
+            const salle = await this.salleService.removeSalle(salleId);
+            if(salle)
+                return salle;
+                throw new HttpException('Salle non trouvé', HttpStatus.NOT_FOUND);
         }
 }
