@@ -17,7 +17,7 @@ export class SalleController {
     
     @Get(':salleId')
         async getSalleById(@Param('salleId') salleId) {
-            Logger.log('Récupérer une salles', 'SalleController');
+            Logger.log('Récupérer une salle', 'SalleController');
             const salle = await this.salleService.getSalleById(salleId);
             if(salle)
                 return salle;

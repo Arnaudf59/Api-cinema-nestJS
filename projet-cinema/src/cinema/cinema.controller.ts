@@ -10,14 +10,14 @@ export class CinemaController {
     ){}
 
     @Get()
-        getCinema() {
-            Logger.log('Recup tous les cinéma', 'CinemaController');
+        getCinemas() {
+            Logger.log('Recup tous les cinémas', 'CinemaController');
             return this.cinemaService.getCinema();
         }
     
     @Get(':cinemaId')
         async getCinemaById(@Param('cinemaId') cinemaId) {
-            Logger.log('Recup tous les cinéma', 'CinemaController');
+            Logger.log('Recup un cinéma', 'CinemaController');
             const cinema = await this.cinemaService.getCinemaById(cinemaId);
             if(cinema)
                 return cinema;
