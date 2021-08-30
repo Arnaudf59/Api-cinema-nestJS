@@ -24,6 +24,15 @@ export class SalleController {
             throw new HttpException('Salle non trouvé', HttpStatus.NOT_FOUND);
         }
 
+    @Get('/cinema/:cinemaId')
+        async getSalleByCinema(@Param('cinemaId') cinemaId) {
+            Logger.log('Recupère les salle du cinéma', 'SalleController');
+            const salle = await this.salleService.getSalleByCinema(cinemaId);
+            if(salle)
+                return salle;
+                throw new HttpException('Salle non trouvé', HttpStatus.NOT_FOUND);
+        }
+
     @Post(':cinemaId')
         async createSalle(@Param('cinemaId') cinemaId,@Body() salleDto: SalleDto) {
             Logger.log('Créer une salle', 'SalleController');

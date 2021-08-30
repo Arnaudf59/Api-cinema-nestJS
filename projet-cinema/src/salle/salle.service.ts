@@ -25,6 +25,13 @@ export class SalleService {
         return null;
     }
 
+    async getSalleByCinema(cinemaId: number){
+        const cinema = await this.cinemaService.getCinemaById(cinemaId)
+        if(!cinema)
+            return null;
+        return this.salleRepository.find({ where : {'cinema' : cinemaId}, relations: ['cinema']});
+    }
+
     async createSalle(cinemaId: number, salleDto: SalleDto) {
         const cinema = await this.cinemaService.getCinemaById(cinemaId);
         if(!cinema)

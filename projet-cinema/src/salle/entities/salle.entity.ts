@@ -13,6 +13,6 @@ export class SalleEntity {
     @Column({type: 'int'})
     nbPlaces: Number;
 
-    @ManyToOne(type => CinemaEntity, cinema => cinema.salles)
+    @ManyToOne(type => CinemaEntity, cinema => cinema.salles, {onDelete: 'CASCADE'})
     cinema : CinemaEntity;
 }
