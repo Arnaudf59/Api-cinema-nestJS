@@ -1,121 +1,103 @@
 {
 	"info": {
-		"_postman_id": "d2e00a66-2a3e-4f44-97b6-cf7288fe13b1",
-		"name": "Cinema",
+		"_postman_id": "f88a0fee-33ac-449f-ad0a-a0994db775ef",
+		"name": "Seance",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Get Cinema",
+			"name": "Get Seance",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/cinema",
+					"raw": "http://localhost:3000/seance",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"cinema"
+						"seance"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Get Cinema By Id",
+			"name": "Get Seance By Id",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/cinema/3",
+					"raw": "http://localhost:3000/seance/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"cinema",
-						"3"
+						"seance",
+						"1"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Post Cinema",
+			"name": "Post Seance",
 			"request": {
 				"method": "POST",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nom\": \"Kinepolis Nîmes\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "http://localhost:3000/cinema",
+					"raw": "http://localhost:3000/seance",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"cinema"
+						"seance"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Patch Cinema",
+			"name": "Patch Seance",
 			"request": {
 				"method": "PATCH",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nom\" : \"Kinepolis Nîmes\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "http://localhost:3000/cinema/4",
+					"raw": "http://localhost:3000/seance/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"cinema",
-						"4"
+						"seance",
+						"1"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Delete Cinema",
+			"name": "Delete Seance",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/cinema/4",
+					"raw": "http://localhost:3000/seance/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"cinema",
-						"4"
+						"seance",
+						"1"
 					]
 				}
 			},
