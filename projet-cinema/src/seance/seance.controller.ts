@@ -1,35 +1,53 @@
-import { Controller, Delete, Get, Logger, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Logger, Param, Patch, Post } from '@nestjs/common';
+import { SeanceDto } from 'src/dtos/seance.dto';
+import { SeanceService } from './seance.service';
 
 @Controller('seance')
 export class SeanceController {
 
+    constructor(
+        private readonly seanceService: SeanceService
+    ){}
+
     @Get()
         getSeances() {
             Logger.log('Récupérer toutes les séances', 'SeanceController');
-            return [];
+            return this.seanceService.getSeances();
         }
     
-    @Get(':seanceId')
-        getSeanceById(@Param('seanceId') seanceId) {
-            Logger.log('Récupérer une séance', 'SeanceController');
-            return seanceId;
+    @Get(':seanceId') 
+        async getFilmById(@Param('seanceId') seanceId) {
+            Logger.log('Récupére une seance', 'SeanceController');
+            const seance = await this.seanceService.getSeanceById(seanceId);
+            if(seance)
+                return seance;
+            throw new HttpException('Seance non trouvé', HttpStatus.NOT_FOUND);
         }
 
-    @Post()
-        createSeance() {
+    @Post('/cinema/:cinemaId/salle/:salleId/film/:filmId')
+        createSeance(@Param('cinemaId') cinemaId, @Param('salleId') salleId, @Param('filmId') filmId, @Body() seanceDto: SeanceDto) {
             Logger.log('Créer une séance', 'SeanceController');
-            return 'Seance créée';
+            const seance = this.seanceService.postSeance(cinemaId, salleId, filmId, seanceDto);
+            if(seance)
+                return seance;
+            throw new HttpException('Seance non trouvé', HttpStatus.NOT_FOUND);
         }
 
     @Patch(':seanceId')
-        updateSeance(@Param('seanceId') seanceId) {
+        async updateSeance(@Param('seanceId') seanceId, @Body() SeanceDto) {
             Logger.log('Modifier une seance', 'SeanceController');
-            return 'Seance modifiée';
+            const seance = await this.seanceService.updateSeance(seanceId, SeanceDto);
+            if(seance)
+                return seance;
+            throw new HttpException('Seance non modifié', HttpStatus.NOT_MODIFIED);
         }
 
     @Delete(':seanceId')
-        removeSeance(@Param('seanceId') seanceId) {
+        async removeSeance(@Param('seanceId') seanceId) {
             Logger.log('Supprimer une seance', 'SeanceController');
-            return 'Seance supprimer';
+            const seance = await this.seanceService.removeSeance(seanceId);
+            if(seance)
+                return seance;
+            throw new HttpException('Seance non trouvé', HttpStatus.NOT_FOUND);
         }
 }

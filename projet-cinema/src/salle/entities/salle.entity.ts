@@ -6,13 +6,13 @@ import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "ty
 export class SalleEntity {
 
     @PrimaryGeneratedColumn({name : 'salle_id'})
-    id: Number;
+    id: number;
 
     @Column({type: 'int'})
-    numero : Number;
+    numero : number;
 
     @Column({type: 'int'})
-    nbPlaces: Number;
+    nbPlaces: number;
 
     @ManyToOne(type => CinemaEntity, cinema => cinema.salles, {onDelete: 'CASCADE'})
     cinema : CinemaEntity;

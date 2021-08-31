@@ -12,13 +12,13 @@ export class SeanceEntity {
     @Column({type: 'timestamp'})
     date: Date;
 
-    @ManyToOne(type => CinemaEntity, cinema => cinema.seances)
+    @ManyToOne(type => CinemaEntity, cinema => cinema.seances, {onDelete: 'CASCADE'})
     cinema : CinemaEntity;
 
-    @ManyToOne(type => SalleEntity, salle => salle.seances)
+    @ManyToOne(type => SalleEntity, salle => salle.seances, {onDelete: 'CASCADE'})
     salle : SalleEntity;
 
-    @ManyToOne(type => FilmEntity, film => film.seances)
+    @ManyToOne(type => FilmEntity, film => film.seances, {onDelete: 'CASCADE'})
     film : FilmEntity;
 
 }
