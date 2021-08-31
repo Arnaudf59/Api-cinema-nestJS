@@ -14,10 +14,19 @@ export class SalleService {
         private cinemaService : CinemaService
     ){}
 
+    /**
+     * Methode pour récupérer toutes les salles
+     * @returns toutes les salles
+     */
     getSalle() {
         return this.salleRepository.find({relations : ['cinema']});
     }
 
+    /**
+     * Methode pour récupérer une salle en fonction de l'id
+     * @param salleId Id de la salle recherchée
+     * @returns retourne la salle trouvée
+     */
     async getSalleById(salleId: number) {
         const salle = await this.salleRepository.findOne(salleId, {relations : ['cinema']});
         if(salle)
@@ -25,6 +34,11 @@ export class SalleService {
         return null;
     }
 
+    /**
+     * Methode pour récupérer une salle en fonction de l'id d'un cinema
+     * @param cinemaId Id du cinema
+     * @returns retourne la salle trouvé
+     */
     async getSalleByCinema(cinemaId: number){
         const cinema = await this.cinemaService.getCinemaById(cinemaId)
         if(!cinema)
@@ -32,6 +46,12 @@ export class SalleService {
         return this.salleRepository.find({ where : {'cinema' : cinemaId}, relations: ['cinema']});
     }
 
+    /**
+     * Methode pour créer une nouvelle salle
+     * @param cinemaId Cinema dont la salle fait partie
+     * @param salleDto information salle
+     * @returns la salle enregistrée
+     */
     async createSalle(cinemaId: number, salleDto: SalleDto) {
         const cinema = await this.cinemaService.getCinemaById(cinemaId);
         if(!cinema)
@@ -43,6 +63,12 @@ export class SalleService {
         return this.salleRepository.save(salle);
     }
     
+    /**
+     * Methode pour modifier une salle
+     * @param salleId Id de la salle à modifier
+     * @param salleDto Modification à apporter
+     * @returns Retourne la salle modifié
+     */
     async updateSalle(salleId: number, salleDto: SalleDto){
         const salle = await this.salleRepository.findOne(salleId)
         if(!salle)
@@ -51,6 +77,11 @@ export class SalleService {
         return await this.salleRepository.findOne(salleId, {relations : ['cinema']});
     }
 
+    /**
+     * Methode pour supprimer une salle
+     * @param salleId Id de la salle à supprimer
+     * @returns retourne la salle supprimé 
+     */
     async removeSalle(salleId: number){
         const salle = await this.salleRepository.findOne(salleId);
         if(!salle)

@@ -80,7 +80,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/salle/2",
+					"raw": "http://localhost:3000/salle/5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -88,7 +88,7 @@
 					"port": "3000",
 					"path": [
 						"salle",
-						"2"
+						"5"
 					]
 				}
 			},
@@ -101,7 +101,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"numero\" : 1,\r\n    \"nbPlaces\" : 155\r\n}",
+					"raw": "{\r\n    \"numero\" : 1,\r\n    \"nbPlaces\" : 160\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -109,7 +109,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/salle/1",
+					"raw": "http://localhost:3000/salle/9",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -117,7 +117,7 @@
 					"port": "3000",
 					"path": [
 						"salle",
-						"1"
+						"9"
 					]
 				}
 			},
@@ -129,7 +129,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/salle/5",
+					"raw": "http://localhost:3000/salle/9",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -137,7 +137,7 @@
 					"port": "3000",
 					"path": [
 						"salle",
-						"5"
+						"9"
 					]
 				}
 			},
