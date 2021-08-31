@@ -33,3 +33,5 @@ Database: projet_cinema_nestjs
 -   Post seance
 -   Patch seance
 -   Delete seance
+#### Ticket
+-   Get Ticket

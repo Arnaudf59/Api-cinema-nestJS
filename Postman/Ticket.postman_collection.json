@@ -1,0 +1,29 @@
+{
+	"info": {
+		"_postman_id": "9b071d39-3a8e-44a9-9d17-9396f80ed7f2",
+		"name": "Ticket",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get ticket",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/ticket/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ticket",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -19,11 +19,11 @@ export class SeanceService {
     ){}
 
     getSeances() {
-        return this.seanceRepository.find();
+        return this.seanceRepository.find({relations : ['cinema', 'salle', 'film']});
     }
 
     async getSeanceById(seanceId: number) {
-        const seance = this.seanceRepository.findOne(seanceId);
+        const seance = this.seanceRepository.findOne(seanceId, {relations : ['cinema', 'salle', 'film']});
         if(seance)
             return seance;
         return null;
@@ -55,7 +55,7 @@ export class SeanceService {
         if(!seance)
             return null;
         await this.seanceRepository.update(seanceId, seanceDto);
-        const seanceModif = await this.seanceRepository.findOne(seanceId, {relations : ['cinema', 'salle', 'film']});
+        const seanceModif = await this.seanceRepository.findOne(seanceId);
         const salle = await this.salleService.getSalleById(seanceModif.salle.id);
         if(seanceModif.cinema.id == salle.cinema.id)
             return seanceModif
