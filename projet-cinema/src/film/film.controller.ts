@@ -24,6 +24,15 @@ export class FilmController {
             throw new HttpException('Film non trouvé', HttpStatus.NOT_FOUND);
         }
 
+    @Get('/cinema/:cinemaId')
+        async getFilmByCinema(@Param('cinemaId') cinemaId) {
+            Logger.log('Récuépre les film par cinema', 'FilmCintroller');
+            const films = await this.filmService.getFilmByCinema(cinemaId);
+            if(films)
+                return films;
+            throw new HttpException('Film non trouvé', HttpStatus.NOT_FOUND);
+        }
+
     @Post()
         async createFilm(@Body() filmDto: FilmDto){
             Logger.log('Créer un Film', 'FilmController');
