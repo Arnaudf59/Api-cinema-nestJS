@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FilmDto } from 'src/dtos/film.dto';
+import { SeanceEntity } from 'src/seance/entities/seance.entity';
 import { Repository } from 'typeorm';
 import { FilmEntity } from './entities/film.entity';
 
@@ -21,6 +22,14 @@ export class FilmService {
         if(film)
             return film;
         return null;
+    }
+
+    async getFilmByCinema(cinemaId: number) {
+        const film = await this.filmRepository.createQueryBuilder('films')
+        .innerJoinAndMapOne('films.seance', SeanceEntity, 'seances', 'seances.filmId = films.id')
+        .where('seances.cinemaId = :cinemaId', {cinemaId: cinemaId})
+        .getMany();
+        return film;
     }
 
     async createFilm(filmDto : FilmDto) {
