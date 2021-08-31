@@ -1,7 +1,7 @@
 export class SalleDto {
 
-    numero: Number;
+    numero: number;
 
-    nbPlaces: Number;
+    nbPlaces: number;
 
 }

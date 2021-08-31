@@ -1,43 +1,43 @@
 {
 	"info": {
-		"_postman_id": "061e5f09-44e3-424d-a250-6f6781b62517",
-		"name": "Salle",
+		"_postman_id": "f88a0fee-33ac-449f-ad0a-a0994db775ef",
+		"name": "Seance",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Get Salle",
+			"name": "Get Seance",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/salle",
+					"raw": "http://localhost:3000/seance",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"salle"
+						"seance"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Get Salle By Id",
+			"name": "Get Seance By Id",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/salle/1",
+					"raw": "http://localhost:3000/seance/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"salle",
+						"seance",
 						"1"
 					]
 				}
@@ -45,34 +45,13 @@
 			"response": []
 		},
 		{
-			"name": "Get Salle By Cinema",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/salle/cinema/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"salle",
-						"cinema",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Post Salle",
+			"name": "Post Seance",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"numero\" : 2,\r\n    \"nbPlaces\" : 200\r\n}",
+					"raw": "{\r\n    \"date\": \"2021-09-06 19:00:00\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -80,43 +59,19 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/salle/2",
+					"raw": "http://localhost:3000/seance/cinema/1/salle/1/film/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
+						"seance",
+						"cinema",
+						"1",
 						"salle",
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Patch Salle",
-			"request": {
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"numero\" : 1,\r\n    \"nbPlaces\" : 155\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/salle/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"salle",
+						"1",
+						"film",
 						"1"
 					]
 				}
@@ -124,20 +79,49 @@
 			"response": []
 		},
 		{
-			"name": "Delete salle",
+			"name": "Patch Seance",
 			"request": {
-				"method": "DELETE",
+				"method": "PATCH",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"date\" : \"2021-09-05 12:45:00\",\r\n    \"salle\": {\r\n        \"id\": 2,\r\n        \"numero\": 2,\r\n        \"nbPlaces\": 200\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:3000/salle/5",
+					"raw": "http://localhost:3000/seance/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"salle",
-						"5"
+						"seance",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Seance",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/seance/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"seance",
+						"3"
 					]
 				}
 			},

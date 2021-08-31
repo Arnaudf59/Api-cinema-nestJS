@@ -1,18 +1,22 @@
 import { CinemaEntity } from "src/cinema/entities/cinema.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { SeanceEntity } from "src/seance/entities/seance.entity";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('salles')
 export class SalleEntity {
 
     @PrimaryGeneratedColumn({name : 'salle_id'})
-    id: Number;
+    id: number;
 
     @Column({type: 'int'})
-    numero : Number;
+    numero : number;
 
     @Column({type: 'int'})
-    nbPlaces: Number;
+    nbPlaces: number;
 
     @ManyToOne(type => CinemaEntity, cinema => cinema.salles, {onDelete: 'CASCADE'})
     cinema : CinemaEntity;
+
+    @OneToMany(type => SeanceEntity, seance => seance.salle)
+    seances : SeanceEntity[];
 }
