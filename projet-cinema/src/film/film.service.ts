@@ -47,6 +47,23 @@ export class FilmService {
     }
 
     /**
+     * Methode pour recuperer les films d'un cinema avec des seances prevu
+     * @param cinemaId Id du cinema dont on veut les films
+     * @returns retourne les films 
+     */
+    async getFilmByCinemaWithSeance(cinemaId: number) {
+        const date = new Date().toISOString();
+        const film = await this.filmRepository.createQueryBuilder('films')
+        .innerJoinAndMapOne('films.seance', SeanceEntity, 'seances', 'seances.filmId = films.id')
+        .where('seances.cinemaId = :cinemaId', {cinemaId: cinemaId})
+        .andWhere(`seances.date > "${date}"`, {date: date})
+        .getMany();
+        if(!film)
+            return null;
+        return film;
+    }
+
+    /**
      * Methode pour créer un film
      * @param filmDto variable de type Film
      * @returns retourne le film créer

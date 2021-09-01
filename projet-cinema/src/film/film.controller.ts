@@ -36,12 +36,26 @@ export class FilmController {
     /**
      * Methode pour appeler le service et obtenir les film par cinema
      * @param cinemaId Id du cinema dont on veut récuperer les films
-     * @returns retournes les films du cinemma 
+     * @returns retournes les films du cinemma avec des seances prevues
      */
     @Get('/cinema/:cinemaId')
         async getFilmByCinema(@Param('cinemaId') cinemaId) {
             Logger.log('Récuépre les film par cinema', 'FilmCintroller');
             const films = await this.filmService.getFilmByCinema(cinemaId);
+            if(films)
+                return films;
+            throw new HttpException('Film non trouvé', HttpStatus.NOT_FOUND);
+        }
+
+    /**
+     * Methode pour appeler le service et obtenir les film par cinema avec des seance prevu
+     * @param cinemaId Id du cinema dont on veut récuperer les films
+     * @returns retournes les films du cinema avec des seances prevu
+     */
+    @Get('/cinema/:cinemaId/date')
+        async getFilmByCinemaWithSeance(@Param('cinemaId') cinemaId) {
+            Logger.log('Récuépre les film par cinema avec des seances prevu', 'FilmCintroller');
+            const films = await this.filmService.getFilmByCinemaWithSeance(cinemaId);
             if(films)
                 return films;
             throw new HttpException('Film non trouvé', HttpStatus.NOT_FOUND);
