@@ -13,10 +13,19 @@ export class FilmService {
         private readonly filmRepository : Repository<FilmEntity>
     ){}
 
+    /**
+     * Methode pour récuperer tous les films
+     * @returns Retourne tous les films
+     */
     getFilms() {
         return this.filmRepository.find();
     }
 
+    /**
+     * Methode pour recuperer un film par id
+     * @param filmId id du film recherché
+     * @returns return le film trouvé
+     */
     async getFilmsById(filmId: number) {
         const film = await this.filmRepository.findOne(filmId);
         if(film)
@@ -24,6 +33,11 @@ export class FilmService {
         return null;
     }
 
+    /**
+     * Methode permettant de recupérer les film présent dans un cinéma
+     * @param cinemaId id du cinema dont on cherhce lees film
+     * @returns liste des films 
+     */
     async getFilmByCinema(cinemaId: number) {
         const film = await this.filmRepository.createQueryBuilder('films')
         .innerJoinAndMapOne('films.seance', SeanceEntity, 'seances', 'seances.filmId = films.id')
@@ -32,11 +46,22 @@ export class FilmService {
         return film;
     }
 
+    /**
+     * Methode pour créer un film
+     * @param filmDto variable de type Film
+     * @returns retourne le film créer
+     */
     async createFilm(filmDto : FilmDto) {
         const film = await this.filmRepository.save(filmDto);
         return film;
     }
 
+    /**
+     * Methode pour modifier un film
+     * @param filmId Id du film à modifier
+     * @param filmDto Modification à apporter 
+     * @returns retourne le film modifié
+     */
     async updateFilm(filmId: number, filmDto: FilmDto) {
         const film = await this.filmRepository.findOne(filmId);
         if(!film)
@@ -45,6 +70,11 @@ export class FilmService {
         return await this.filmRepository.findOne(filmId);
     }
 
+    /**
+     * Méthode pour Supprimer un film
+     * @param filmId Id du film à supprimer
+     * @returns retourne le film supprimé
+     */
     async removeFilm(filmId: number) {
         const film = await this.filmRepository.findOne(filmId);
         if(!film)

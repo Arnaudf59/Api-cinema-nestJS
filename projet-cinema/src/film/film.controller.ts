@@ -9,12 +9,21 @@ export class FilmController {
         private readonly filmService: FilmService
     ){}
 
+    /**
+     * Methode pour appeler le service Film et obtenir tous les films
+     * @returns retourne tous les films
+     */
     @Get()
         getFilms() {
             Logger.log('Récupérer tous les films', 'FilmController');
             return this.filmService.getFilms();
         }
     
+    /**
+     * Methode pour appeler le service Film et obtenir un film
+     * @param filmId Id du film à recupérer
+     * @returns retourne le film voulu
+     */
     @Get(':filmId') 
         async getFilmById(@Param('filmId') filmId) {
             Logger.log('Récupére un film', 'FilmController');
@@ -24,6 +33,11 @@ export class FilmController {
             throw new HttpException('Film non trouvé', HttpStatus.NOT_FOUND);
         }
 
+    /**
+     * Methode pour appeler le service et obtenir les film par cinema
+     * @param cinemaId Id du cinema dont on veut récuperer les films
+     * @returns retournes les films du cinemma 
+     */
     @Get('/cinema/:cinemaId')
         async getFilmByCinema(@Param('cinemaId') cinemaId) {
             Logger.log('Récuépre les film par cinema', 'FilmCintroller');
@@ -33,6 +47,11 @@ export class FilmController {
             throw new HttpException('Film non trouvé', HttpStatus.NOT_FOUND);
         }
 
+    /**
+     * Methode pour créer un nouveau film
+     * @param filmDto Information du nouveau film
+     * @returns retourne le film créé
+     */
     @Post()
         async createFilm(@Body() filmDto: FilmDto){
             Logger.log('Créer un Film', 'FilmController');
@@ -42,6 +61,12 @@ export class FilmController {
                 throw new HttpException('Film non créer', HttpStatus.NOT_MODIFIED);
         }
 
+    /**
+     * Methode pour modifier un film
+     * @param filmId Id du film à modifier
+     * @param filmDto Information à modifier 
+     * @returns Retourne le film modifié
+     */
     @Patch(':filmId')
         async updateFilm(@Param('filmId') filmId, @Body() filmDto) {
             Logger.log('Film modifié', 'FilmController');
@@ -51,6 +76,11 @@ export class FilmController {
                 throw new HttpException('Film non modifier', HttpStatus.NOT_MODIFIED);
         }
 
+    /**
+     * Methode pour supprimer un film
+     * @param filmId Id du film à supprimer
+     * @returns
+     */
     @Delete(':filmId')
         async removeFilm(@Param('filmId') filmId) {
             Logger.log('Film Supprimé', 'FilmController');
