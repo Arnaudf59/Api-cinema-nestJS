@@ -8,6 +8,11 @@ export class TicketController {
         private seanceService: SeanceService
     ){}
 
+    /**
+     * Methode permettant de générer un ticket
+     * @param seanceId Id de la séance choisi
+     * @returns retourne un ticket
+     */
     @Get(':seanceId')
         async getTicket(@Param('seanceId') seanceId){
             const seance = await this.seanceService.getSeanceById(seanceId);
