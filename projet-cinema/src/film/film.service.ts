@@ -43,7 +43,10 @@ export class FilmService {
         .innerJoinAndMapOne('films.seance', SeanceEntity, 'seances', 'seances.filmId = films.id')
         .where('seances.cinemaId = :cinemaId', {cinemaId: cinemaId})
         .getMany();
+        if(film.length == 0)
+            return null;
         return film;
+        
     }
 
     /**
@@ -58,7 +61,7 @@ export class FilmService {
         .where('seances.cinemaId = :cinemaId', {cinemaId: cinemaId})
         .andWhere(`seances.date > "${date}"`, {date: date})
         .getMany();
-        if(!film)
+        if(film.length == 0)
             return null;
         return film;
     }

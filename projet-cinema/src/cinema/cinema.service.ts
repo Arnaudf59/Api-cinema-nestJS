@@ -39,7 +39,9 @@ export class CinemaService {
      */
     async createCinema(cinemaDto : CinemaDto) {
         const cinema = await this.cinemaRepository.save(cinemaDto);
-        return cinema;
+        if(cinema)
+            return cinema;
+        return null;
     }
 
     /**
@@ -50,10 +52,12 @@ export class CinemaService {
      */
     async updateCinema(cinemaId: number, cinemaDto: CinemaDto){
         const cinema = await this.cinemaRepository.findOne(cinemaId)
-        if(!cinema)
-            return null;
-        await this.cinemaRepository.update(cinemaId, cinemaDto);
-        return await this.cinemaRepository.findOne(cinemaId, {relations : ['salles']});
+        if(cinema){
+            await this.cinemaRepository.update(cinemaId, cinemaDto);
+            return await this.cinemaRepository.findOne(cinemaId, {relations : ['salles']});
+        }
+        return null;
+        
     }
 
     /**
