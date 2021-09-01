@@ -73,7 +73,8 @@ export class SeanceService {
         seance.salle = salle;
         seance.film = film;
         // Et on l'enregistre dans notre bdd
-        return this.seanceRepository.save(seance);
+        const newSeance = await this.seanceRepository.save(seance);
+        return newSeance;
     }
 
     /**

@@ -17,7 +17,7 @@ export class TicketController {
         async getTicket(@Param('seanceId') seanceId){
             const seance = await this.seanceService.getSeanceById(seanceId);
             if(!seance)
-                throw new HttpException('Ticket non généré', HttpStatus.NOT_FOUND);
+                throw new HttpException('Seance non trouvée (ticket non créé)', HttpStatus.NOT_FOUND);
             let ticket = {
                 "cinema" : "cinema : "+seance.cinema.nom,
                 "film" : "film : "+seance.film.nom,

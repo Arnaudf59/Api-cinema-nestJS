@@ -42,12 +42,12 @@ export class SeanceController {
      * @returns return la seance créé
      */
     @Post('/cinema/:cinemaId/salle/:salleId/film/:filmId')
-        createSeance(@Param('cinemaId') cinemaId, @Param('salleId') salleId, @Param('filmId') filmId, @Body() seanceDto: SeanceDto) {
+        async createSeance(@Param('cinemaId') cinemaId, @Param('salleId') salleId, @Param('filmId') filmId, @Body() seanceDto: SeanceDto) {
             Logger.log('Créer une séance', 'SeanceController');
-            const seance = this.seanceService.postSeance(cinemaId, salleId, filmId, seanceDto);
+            const seance = await this.seanceService.postSeance(cinemaId, salleId, filmId, seanceDto);
             if(seance)
                 return seance;
-            throw new HttpException('Seance non trouvé', HttpStatus.NOT_FOUND);
+            throw new HttpException('Seance non modifié (vérifier id du cinema, de la salle ou du film)', HttpStatus.NOT_FOUND);
         }
 
     /**
@@ -62,7 +62,7 @@ export class SeanceController {
             const seance = await this.seanceService.updateSeance(seanceId, SeanceDto);
             if(seance)
                 return seance;
-            throw new HttpException('Seance non modifié', HttpStatus.NOT_MODIFIED);
+            throw new HttpException('Seance non modifié', HttpStatus.BAD_REQUEST);
         }
 
     /**

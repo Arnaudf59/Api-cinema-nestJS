@@ -59,7 +59,7 @@ export class SalleController {
             const salle = await this.salleService.createSalle(cinemaId, salleDto);
             if(salle)
                 return salle;
-                throw new HttpException('Salle non trouvé', HttpStatus.NOT_FOUND);
+            throw new HttpException('Cinema non trouvé', HttpStatus.NOT_FOUND);
         }
 
     /**
@@ -74,7 +74,7 @@ export class SalleController {
             const salle = await this.salleService.updateSalle(salleId, salleDto);
             if(salle)
                 return salle;
-            throw new HttpException('Salle non modifié', HttpStatus.NOT_MODIFIED);
+            throw new HttpException('Salle non modifié', HttpStatus.NOT_FOUND);
         }
 
     /**
@@ -88,6 +88,6 @@ export class SalleController {
             const salle = await this.salleService.removeSalle(salleId);
             if(salle)
                 return salle;
-                throw new HttpException('Salle non trouvé', HttpStatus.NOT_FOUND);
+            throw new HttpException('Salle non supprimé', HttpStatus.NOT_FOUND);
         }
 }

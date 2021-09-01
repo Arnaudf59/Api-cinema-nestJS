@@ -44,7 +44,7 @@ export class FilmController {
             const films = await this.filmService.getFilmByCinema(cinemaId);
             if(films)
                 return films;
-            throw new HttpException('Film non trouvé', HttpStatus.NOT_FOUND);
+            throw new HttpException('Film ou cinema non trouvée', HttpStatus.NOT_FOUND);
         }
 
     /**
@@ -58,7 +58,7 @@ export class FilmController {
             const films = await this.filmService.getFilmByCinemaWithSeance(cinemaId);
             if(films)
                 return films;
-            throw new HttpException('Film non trouvé', HttpStatus.NOT_FOUND);
+            throw new HttpException('Film ou Cinema non trouvés', HttpStatus.NOT_FOUND);
         }
 
     /**
@@ -87,7 +87,7 @@ export class FilmController {
             const film = await this.filmService.updateFilm(filmId, filmDto);
             if(film)
                 return film;
-                throw new HttpException('Film non modifier', HttpStatus.NOT_MODIFIED);
+            throw new HttpException('Film non modifié', HttpStatus.NOT_FOUND);
         }
 
     /**
@@ -101,7 +101,6 @@ export class FilmController {
             const film = await this.filmService.removeFilm(filmId);
             if(film)
                 return film;
-            throw new HttpException('Film non trouvé', HttpStatus.NOT_FOUND);
-            
+            throw new HttpException('Film non trouvé (Film non supprimé)', HttpStatus.NOT_FOUND);
         }
 }

@@ -30,7 +30,7 @@ export class CinemaController {
             const cinema = await this.cinemaService.getCinemaById(cinemaId);
             if(cinema)
                 return cinema;
-            throw new HttpException('Article non trouvé', HttpStatus.NOT_FOUND);
+            throw new HttpException('Cinema non trouvé', HttpStatus.NOT_FOUND);
         }
 
     /**
@@ -59,7 +59,7 @@ export class CinemaController {
             const cinema = await this.cinemaService.updateCinema(cinemaId, cinemaDto);
             if(cinema)
                 return cinema;
-            throw new HttpException('Cinema non modifié', HttpStatus.NOT_MODIFIED);
+            throw new HttpException('Cinema non modifié', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     
     /**
