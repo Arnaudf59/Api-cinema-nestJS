@@ -91,7 +91,7 @@ export class SeanceService {
         //On modifie notre seance
         await this.seanceRepository.update(seanceId, seanceDto);
         // on recupère la seance modifié
-        const seanceModif = await this.seanceRepository.findOne(seanceId);
+        const seanceModif = await this.seanceRepository.findOne(seanceId, {relations : ['cinema', 'salle', 'film']});
         //On recupère la salle ou est diffuser la seance
         const salle = await this.salleService.getSalleById(seanceModif.salle.id);
         //On verifie que le cinema qui a été selectionné lors de la seance
