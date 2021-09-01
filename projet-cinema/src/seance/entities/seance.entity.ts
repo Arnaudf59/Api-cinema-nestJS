@@ -1,9 +1,10 @@
 import { CinemaEntity } from "src/cinema/entities/cinema.entity";
 import { FilmEntity } from "src/film/entities/film.entity";
 import { SalleEntity } from "src/salle/entities/salle.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity('seances')
+@Unique("UQ_NAMES", ["date", "cinema", "salle"])
 export class SeanceEntity {
 
     @PrimaryGeneratedColumn({name : 'seance_id'})
