@@ -25,6 +25,7 @@ Database: projet_cinema_nestjs
 -   Get film
 -   Get film by id
 -   Get film by cinema
+-   Get film by cinema with seance
 -   Post film
 -   Patch film
 -   Delete film
