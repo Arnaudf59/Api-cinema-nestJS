@@ -46,6 +46,15 @@ export class FilmController {
                 return films;
             throw new HttpException('Film ou cinema non trouvée', HttpStatus.NOT_FOUND);
         }
+        
+    @Get('/cinema/:cinemaId/limit/:limit/offset/:offset')
+        async getFilmByCinemaPagination(@Param('cinemaId') cinemaId, @Param('limit') limit, @Param('offset') offset) {
+            Logger.log('Récuépre les film par cinema', 'FilmCintroller');
+            const films = await this.filmService.getFilmByCinemaPagination(cinemaId, limit, offset);
+            if(films)
+                return films;
+            throw new HttpException('Film ou cinema non trouvée', HttpStatus.NOT_FOUND);
+        }
 
     /**
      * Methode pour appeler le service et obtenir les film par cinema avec des seance prevu
@@ -72,7 +81,7 @@ export class FilmController {
             const film = await this.filmService.createFilm(filmDto);
             if(film)
                 return film;
-                throw new HttpException('Film non créer', HttpStatus.NOT_MODIFIED);
+            throw new HttpException('Film non créer', HttpStatus.NOT_MODIFIED);
         }
 
     /**

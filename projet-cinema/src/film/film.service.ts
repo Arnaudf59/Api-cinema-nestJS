@@ -49,6 +49,19 @@ export class FilmService {
         
     }
 
+    async getFilmByCinemaPagination(cinemaId: number, limit: number, offset: number) {
+        const film = await this.filmRepository.createQueryBuilder('films')
+        .innerJoinAndMapOne('films.seance', SeanceEntity, 'seances', 'seances.filmId = films.id')
+        .where('seances.cinemaId = :cinemaId', {cinemaId: cinemaId})
+        .limit(limit)
+        .offset(offset)
+        .getMany();
+        if(film.length == 0)
+            return null;
+        return film;
+        
+    }
+
     /**
      * Methode pour recuperer les films d'un cinema avec des seances prevu
      * @param cinemaId Id du cinema dont on veut les films

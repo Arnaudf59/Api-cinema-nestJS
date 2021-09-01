@@ -163,6 +163,31 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get Film By Cinema Pagination",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/film/cinema/1/limit/3/offset/0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"film",
+						"cinema",
+						"1",
+						"limit",
+						"3",
+						"offset",
+						"0"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
