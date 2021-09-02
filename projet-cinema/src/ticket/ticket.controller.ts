@@ -1,6 +1,8 @@
 import { Controller, Get, HttpException, HttpStatus, Param } from '@nestjs/common';
+import { ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { SeanceService } from 'src/seance/seance.service';
 
+@ApiTags('Tickets')
 @Controller('ticket')
 export class TicketController {
 
@@ -14,6 +16,8 @@ export class TicketController {
      * @returns retourne un ticket
      */
     @Get(':seanceId')
+    @ApiParam({name: "seanceId"})
+    @ApiOperation({summary: 'Création d\'un ticket'})
         async getTicket(@Param('seanceId') seanceId){
             const seance = await this.seanceService.getSeanceById(seanceId);
             if(!seance)

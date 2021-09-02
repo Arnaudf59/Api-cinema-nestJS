@@ -1,7 +1,9 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Logger, Param, Patch, Post } from '@nestjs/common';
+import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { SalleDto } from 'src/dtos/salle.dto';
 import { SalleService } from './salle.service';
 
+@ApiTags("Salles")
 @Controller('salle')
 export class SalleController {
 
@@ -14,6 +16,7 @@ export class SalleController {
      * @returns retourne toutes les salles
      */
     @Get()
+    @ApiOperation({summary: 'Récupérer toutes les salles'})
         getSalles(){
             Logger.log('Récupérer toutes les salles', 'SalleController');
             return this.salleService.getSalle();
@@ -25,6 +28,8 @@ export class SalleController {
      * @returns retourne la salle recherchée
      */
     @Get(':salleId')
+    @ApiParam({name: 'salleId'})
+    @ApiOperation({summary: 'Récupérer une salle'})
         async getSalleById(@Param('salleId') salleId) {
             Logger.log('Récupérer une salle', 'SalleController');
             const salle = await this.salleService.getSalleById(salleId);
@@ -39,6 +44,8 @@ export class SalleController {
      * @returns retourne la salle recherchée
      */
     @Get('/cinema/:cinemaId')
+    @ApiParam({name: 'cinemaId'})
+    @ApiOperation({summary: 'Récupérer toutes les salles d\'un cinéma'})
         async getSalleByCinema(@Param('cinemaId') cinemaId) {
             Logger.log('Recupère les salle du cinéma', 'SalleController');
             const salle = await this.salleService.getSalleByCinema(cinemaId);
@@ -54,6 +61,8 @@ export class SalleController {
      * @returns retourne la ssalle créé
      */
     @Post(':cinemaId')
+    @ApiParam({name: 'cinemaId'})
+    @ApiOperation({summary: 'Création d\'une salle'})
         async createSalle(@Param('cinemaId') cinemaId,@Body() salleDto: SalleDto) {
             Logger.log('Créer une salle', 'SalleController');
             const salle = await this.salleService.createSalle(cinemaId, salleDto);
@@ -69,6 +78,9 @@ export class SalleController {
      * @returns return la salle modifiée
      */
     @Patch(':salleId')
+    @ApiParam({name: "salleId"})
+    @ApiBody({type: SalleDto})
+    @ApiOperation({summary: 'Modification d\'une salle'})
         async updateSalle(@Param('salleId') salleId, @Body() salleDto) {
             Logger.log('Modifier une Salle', 'SalleController');
             const salle = await this.salleService.updateSalle(salleId, salleDto);
@@ -83,6 +95,8 @@ export class SalleController {
      * @returns retourne la salle à supprimer
      */
     @Delete(':salleId')
+    @ApiParam({name: "salleId"})
+    @ApiOperation({summary: 'Suppression d\'une salle'})
         async remove(@Param('salleId') salleId) {
             Logger.log('Supprimer une salle', 'SalleController');
             const salle = await this.salleService.removeSalle(salleId);
