@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Logger, Param, Patch, Post } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { SalleDto } from 'src/dtos/salle.dto';
+import { SalleEntity } from './entities/salle.entity';
 import { SalleService } from './salle.service';
 
 @ApiTags("Salles")
@@ -63,7 +64,7 @@ export class SalleController {
     @Post(':cinemaId')
     @ApiParam({name: 'cinemaId'})
     @ApiOperation({summary: 'Création d\'une salle'})
-        async createSalle(@Param('cinemaId') cinemaId,@Body() salleDto: SalleDto) {
+        async createSalle(@Param('cinemaId') cinemaId,@Body() salleDto: SalleDto): Promise<SalleEntity> {
             Logger.log('Créer une salle', 'SalleController');
             const salle = await this.salleService.createSalle(cinemaId, salleDto);
             if(salle)

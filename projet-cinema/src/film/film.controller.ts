@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Logger, Param, Patch, Post } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { FilmDto } from 'src/dtos/film.dto';
+import { FilmEntity } from './entities/film.entity';
 import { FilmService } from './film.service';
 
 @ApiTags("Films")
@@ -90,7 +91,7 @@ export class FilmController {
      */
     @Post()
     @ApiOperation({summary: 'Création d\'un film'})
-        async createFilm(@Body() filmDto: FilmDto){
+        async createFilm(@Body() filmDto: FilmDto): Promise<FilmEntity>{
             Logger.log('Créer un Film', 'FilmController');
             const film = await this.filmService.createFilm(filmDto);
             if(film)
