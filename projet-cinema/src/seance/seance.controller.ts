@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Logger, Param, Patch, Post } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { SeanceDto } from 'src/dtos/seance.dto';
+import { SeanceEntity } from './entities/seance.entity';
 import { SeanceService } from './seance.service';
 
 @ApiTags('Seances')
@@ -51,7 +52,7 @@ export class SeanceController {
     @ApiParam({name: 'salleId'})
     @ApiParam({name: 'filmId'})
     @ApiOperation({summary: 'Créer une séance'}) 
-        async createSeance(@Param('cinemaId') cinemaId, @Param('salleId') salleId, @Param('filmId') filmId, @Body() seanceDto: SeanceDto) {
+        async createSeance(@Param('cinemaId') cinemaId, @Param('salleId') salleId, @Param('filmId') filmId, @Body() seanceDto: SeanceDto):Promise<SeanceEntity> {
             Logger.log('Créer une séance', 'SeanceController');
             const seance = await this.seanceService.postSeance(cinemaId, salleId, filmId, seanceDto);
             if(seance)
