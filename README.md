@@ -6,6 +6,8 @@ Bdd: Mysql
 
 Database: projet_cinema_nestjs
 
+Dependances: npm
+
 ---
 ### Liste des actions
 #### Cinema :
@@ -38,3 +40,9 @@ Database: projet_cinema_nestjs
 -   Delete seance
 #### Ticket
 -   Get Ticket
+
+---
+
+### Swaggger
+
+En plus de Postman, Il est possible d'utiliser swagger sur l'URL suivante : "http://localhost:3000/api/"
